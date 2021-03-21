@@ -14,8 +14,9 @@ public class Board {
 			throw new Exception("Index out of bound"); 
 		} 
 
-		return boxes[x][y]; 
+		return this.boxes[x][y]; 
 	} 
+
 
 	public void resetBoard() 
 	{ 

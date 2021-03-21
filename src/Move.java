@@ -14,11 +14,19 @@ public class Move {
 	}
 
 	public Spot getStart() {
-		return start;
+		return this.start;
+	}
+	
+	public void setStart(Spot st) {
+		this.start = st;
 	}
 	
 	public Spot getEnd() {
-		return end;
+		return this.end;
+	}
+	
+	public void setEnd(Spot end) {
+		this.end = end;
 	}
 	
 	public void setPieceKilled(Piece toKill) {
