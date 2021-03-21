@@ -57,7 +57,7 @@ public class Game {
 			Spot startBox = board.getBox(startX, startY);  
 			Spot endBox = board.getBox(endX, endY); 
 			
-			System.out.println(board.boxes[startX][startY].getPiece());
+			// System.out.println(board.boxes[startX][startY].getPiece());
 			
 			Move move = new Move(player, startBox, endBox);
 			move.setStart(startBox);
@@ -113,8 +113,8 @@ public class Game {
 
 		// valid move? 
 		if (!sourcePiece.canMove(move.getStart(), move.getEnd())) {
-			System.out.println("\nINVALID CHOICE FOR PLACEMENT.");
-			System.out.println(move.getStart() + " " + move.getEnd());
+			System.out.println("\nINVALID CHOICE FOR PLACEMENT.\nFormat: bottom.col.integer right.row.integer");
+			// System.out.println(move.getStart().getX() + move.getStart().getY() + " " + move.getEnd().getX() + move.getEnd().getY());
 			return false; 
 		} 
 

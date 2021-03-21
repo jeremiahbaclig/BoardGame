@@ -7,10 +7,10 @@ class Main {
 	    int counter = 0;
 	
 	    try{
-	      for(int i=0; i<11; i++){
+	      for(int i=0; i<9; i++){
 	        System.out.println();  
-	        for(int j=0; j<12; j++){
-	          if(j == 11){
+	        for(int j=0; j<10; j++){
+	          if(j == 9){
 	            System.out.print("\t" + counter + "\n");
 	            counter++;
 	          }
@@ -24,8 +24,8 @@ class Main {
 	    }
 	
 		System.out.println("\n");
-		for(int i=0; i<11; i++){
-		  System.out.printf("%c(%d)\t", A+i, i);
+		for(int i=0; i<9; i++){
+		  System.out.printf("%c\t", A+i);
 		}
 	}
 	public static void main(String[] args) {
@@ -42,32 +42,32 @@ class Main {
 		List<Move> moves = new ArrayList<Move>();
 		
 		Game game = new Game(players, board, player1, Move.GameStatus.ACTIVE, moves);
+		
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
+		
 		game.initialize();
+		
 		while(true) {
-			
 			try {
-				System.out.print("\n\nEnter piece [x, y]: ");
+				System.out.print("\n\nEnter piece (ie. A8 A6): ");
 				String coords[] = scanner.nextLine().split(" ");
 				
-				int x = Integer.parseInt(coords[1]);
-				int y = Integer.parseInt(coords[0]);
+				int y = coords[0].charAt(0) - 'A'; 
+				int x = coords[0].charAt(1) - '0';
+				int toY = coords[1].charAt(0) - 'A';
+				int toX = coords[1].charAt(1) - '0';
 				
 				// Spot currentChoice = new Spot(x, y, board.boxes[x][y].getPiece());
 				
 				System.out.print("\nEnter move [x, y]: ");
-				String toCoords[] = scanner.nextLine().split(" ");
-				
-				int toX = Integer.parseInt(toCoords[1]);
-				int toY = Integer.parseInt(toCoords[0]);
 				
 				game.playerMove(game.getTurn(), x, y, toX, toY);
 				
 				printBoard(board);
 			} catch (Exception e) {
 				System.out.println("\nINPUT ERROR!! Try again.");
-			}
-			
+			}	
 		}
 		
 	  }
