@@ -5,4 +5,4 @@ NOTES: 9x9? grid with 2 rows of “pawns”. Plans to add 3 levels of cpu using 
 
 Win condition: first to double promote AND have more pieces than the other person.
 
-![image](https://user-images.githubusercontent.com/55364674/111901074-2fbba780-8a0c-11eb-97ee-44456fb6c00f.png)
+![image](https://user-images.githubusercontent.com/55364674/111901129-685b8100-8a0c-11eb-998c-0a4c22660831.png)
