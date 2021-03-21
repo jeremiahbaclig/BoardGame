@@ -54,13 +54,22 @@ public class Game {
 	public boolean playerMove(Player player, int startX, int startY, int endX, int endY) 
 	{ 
 		try {
-			Spot startBox = board.getBox(startX, startY); 
+			Spot startBox = board.getBox(startX, startY);  
 			Spot endBox = board.getBox(endX, endY); 
+			
+			System.out.println(board.boxes[startX][startY].getPiece());
+			
 			Move move = new Move(player, startBox, endBox);
+			move.setStart(startBox);
+
+			// System.out.println("BEFORE start: " + board.boxes[startX][startY].getX() + " " + board.boxes[startX][startY].getY());
 			
 			if(this.makeMove(move, player)) {
-				this.board.boxes[endX][endY].setPiece(this.board.boxes[startX][startY].getPiece());
-				this.board.boxes[startX][startY].setPiece(null);
+				board.boxes[endX][endY] = new Spot(endX, endY, startBox.getPiece());
+				board.boxes[startX][startY] = null;
+				
+				move.getEnd().setPiece(move.getStart().getPiece()); 
+				move.getStart().setPiece(null);
 				
 				if(player.isWhiteSide())
 					Board.indexes[endX][endY] = 1;
@@ -71,7 +80,6 @@ public class Game {
 				
 				return true;
 			} else {
-				System.out.println("\nINVALID CHOICE FOR PLACEMENT.");
 				return false;
 			}
  
@@ -86,7 +94,10 @@ public class Game {
 	{ 
 		Piece sourcePiece = move.getStart().getPiece(); 
 		if (sourcePiece == null) {
+			int startingX = move.getStart().getX();
+			int startingY = move.getStart().getY();
 			System.out.println("\nINVALID CHOICE.\nNo friendly piece there.");
+			System.out.println("For the chosen square: " + board.boxes[startingX][startingY].getX() + " " + board.boxes[startingX][startingY].getY());
 			return false; 
 		} 
 
@@ -103,23 +114,20 @@ public class Game {
 		// valid move? 
 		if (!sourcePiece.canMove(move.getStart(), move.getEnd())) {
 			System.out.println("\nINVALID CHOICE FOR PLACEMENT.");
+			System.out.println(move.getStart() + " " + move.getEnd());
 			return false; 
 		} 
 
 		// kill? 
 		Piece destPiece = move.getEnd().getPiece(); 
 		if (destPiece != null) { 
-			System.out.printf("\nCAPTURED PIECE ON: [%d, %d]\n", move.getStart().getX(), move.getStart().getY());
+			System.out.printf("\nCAPTURED PIECE ON: [%d, %d]\n", move.getEnd().getX(), move.getEnd().getY());
 			destPiece.setKilled(true); 
 			move.setPieceKilled(destPiece); 
 		} 
 
 		// store the move 
 		movesPlayed.add(move); 
-
-		// move piece from the start box to end box 
-		move.getEnd().setPiece(move.getStart().getPiece()); 
-		move.getStart().setPiece(null); 
 
 		if (destPiece != null && destPiece instanceof PromotedOne) { 
 			if (player.isWhiteSide()) { 

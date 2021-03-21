@@ -31,8 +31,6 @@ class Main {
 	public static void main(String[] args) {
 		Board board = new Board();
 		printBoard(board);
-	
-		// System.out.println(board.boxes[0][0].getPiece().canMove(board.boxes[0][0], board.boxes[2][0]));
 
 		Human player1 = new Human(true);
 		Human player2 = new Human(false);
@@ -52,26 +50,25 @@ class Main {
 				System.out.print("\n\nEnter piece [x, y]: ");
 				String coords[] = scanner.nextLine().split(" ");
 				
-				int x = Integer.parseInt(coords[0]);
-				int y = Integer.parseInt(coords[1]);
+				int x = Integer.parseInt(coords[1]);
+				int y = Integer.parseInt(coords[0]);
 				
-				Spot currentChoice = new Spot(x, y, board.boxes[x][y].getPiece());
+				// Spot currentChoice = new Spot(x, y, board.boxes[x][y].getPiece());
 				
 				System.out.print("\nEnter move [x, y]: ");
 				String toCoords[] = scanner.nextLine().split(" ");
 				
-				int toX = Integer.parseInt(toCoords[0]);
-				int toY = Integer.parseInt(toCoords[1]);
+				int toX = Integer.parseInt(toCoords[1]);
+				int toY = Integer.parseInt(toCoords[0]);
 				
 				game.playerMove(game.getTurn(), x, y, toX, toY);
 				
 				printBoard(board);
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (Exception e) {
 				System.out.println("\nINPUT ERROR!! Try again.");
 			}
 			
 		}
 		
-		// System.out.print(board.indexes[0][5]);
 	  }
 }
